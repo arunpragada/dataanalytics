@@ -1,0 +1,59 @@
+<div id="overlay" style="display: none;">
+    <img id="OverlayImg">
+    <div style="margin-top: 20%;">
+        <div id="overlaytext" style="text-align: center;  font-size: 17px; font-weight: 500; color: #3498db;"></div>
+        <div class="loading_wait"></div>
+    </div>         
+    <!--<img id="OverlayImg" src='css/images/pleasewait.gif' width="128" height="128" style="vertical-align:middle; "/>-->
+</div>
+<div id="parentContainer" style="padding-right:20px">
+    <div id="errorMessageDiv_CART" style="display: none;">
+        <h4 data-bind="text: validationFailedMessage" class="cartErrorMessage"></h4>
+    </div>
+    <div class="oj-form oj-form oj-sm-odd-cols-10 oj-md-odd-cols-5 oj-md-labels-inline oj-sm-labels-inline" id="oci-group-form">
+        <div id="notificationMessages_success" style=" height: 3em;    text-align: center;display: none;">
+            <label style="background: #A0C090;">Dataset is uploaded successfully.<span> It will be available to visualization i a while.</span></label>
+        </div>
+        <div id="notificationMessages_error" style=" height: 3em;    text-align: center; display: none;">
+            <label style="background: #F07010;">Unable to upload dataset.<span> Please contact your system administrator.</span></label>
+        </div>
+
+        <div class="oj-flex"> 
+            <div class="oj-flex-item">
+                <oj-label  for="data_file" show-required>Data File</oj-label>
+            </div>
+            <div class="oj-flex-item">
+                <oj-file-picker id="data_file" accept="[[acceptDataFormat]]" selection-mode="single" on-oj-select='[[selectListenerForData]]'>
+                </oj-file-picker>
+                Selected file: <oj-bind-text value="[[ko.toJSON(dataFileNames)]]"></oj-bind-text>
+            </div>
+        </div>
+        <div style="padding-top: 10px;"></div>
+        <div class="oj-flex"> 
+            <div class="oj-flex-item">
+                <oj-label  for="control_file" show-required>Control File</oj-label>
+            </div>
+            <div class="oj-flex-item">
+                <oj-file-picker id="control_file" accept="[[acceptControlFormat]]" selection-mode="single" on-oj-select='[[selectListenerForControl]]'>
+                </oj-file-picker>
+                Selected file:  <oj-bind-text value="[[ko.toJSON(controlFileNames)]]"></oj-bind-text>
+            </div>
+        </div>
+        <div class="oj-flex"> 
+            <div class="oj-flex-item">
+                <oj-label  show-required>Title</oj-label>
+            </div>
+            <div class="oj-flex-item">
+                <oj-input-text id="dsTitle" value="{{dsTitle}}" rows="2"></oj-input-text>
+            </div>
+        </div>
+        <div class="oj-flex"> 
+            <div class="oj-flex-item">
+                <oj-label  show-required>Justification</oj-label>
+            </div>
+            <div class="oj-flex-item">
+                <oj-text-area id="justification" value="{{justification}}" rows="2"></oj-text-area>
+            </div>
+        </div>
+    </div>
+</div>

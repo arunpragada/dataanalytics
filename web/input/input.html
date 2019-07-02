@@ -1,0 +1,122 @@
+<div id="cal_main" style="width: 98%; margin: auto;animation: fadeEffect 0.5s;">
+<!--    <div style="font-weight: 500;    padding-top: 5px;">
+        Recently uploaded datasets...
+    </div>-->
+    <div class="searchCriteriaDiv">
+        <div id="accountsSearchFilterDIV" class="tableLevelSearchFilter">
+            <oj-label class="searchCriteriaFilterLabel">Filter : </oj-label>
+            <oj-input-text id="filter" maxlength="60" placeholder="Type to filter entities in below list" on-raw-value-changed="[[handleValueChanged]]" value="{{filter}}" class="searchCriteriaFilterInput"></oj-input-text>
+            <oj-button id="clearButton" on-click='{{clearClick}}' display='icons' chroming='half' style="display: inline-block;">
+                <span slot='startIcon' class='oj-fwk-icon oj-fwk-icon-cross03' style="display: inline-block;"></span>
+                Clear
+            </oj-button>
+        </div>
+    </div>
+    <div id="datagrid-wrapper" class="oj-flex gridWrapperContainer">  
+        <!--<div class="oj-sm-12 oj-lg-6 oj-flex-item" style="width:  100%; max-width: 100%; flex: 0 2 100%;margin:  0em 2em 2em 2em;">-->
+        <div class="mainpageActionBtnsContainer">
+            <div id="statusMessageDiv" class="mainpageMessageDiv">
+                <h3 data-bind="text: genericStatusMessage" class="mainpageStatusMessage"></h3>
+            </div>
+            <div id="errorMessageDiv" class="mainpageMessageDiv">
+                <h3 data-bind="text: genericStatusMessage" class="mainpageErrorMessage"></h3>
+            </div>
+            <div class="mainpageActionBtnsDiv">
+                <oj-button id="canpref_but" class="oj-button-sl oj-button oj-component oj-enabled oj-default oj-button-full-chrome oj-button-text-only oj-complete" chroming="full" on-click="{{clearApprovalChanges}}" style="padding-right: 1em; float: right;" title="Clears cart items and current selection as well."><button data-oj-internal="" aria-labelledby="ui-id-8" class="oj-button-button oj-component-initnode">
+                        <div class="oj-button-label"><span class="oj-button-text" id="ui-id-8">Clear</span></div></button>
+                </oj-button>
+                <oj-button id="savepref_but" class="oj-button-sl oj-button oj-component oj-enabled oj-default oj-button-full-chrome oj-button-text-only oj-complete" chroming="full" on-click="{{deleteDataset}}" style="padding-right: 1em; float: right;"><button data-oj-internal="" aria-labelledby="ui-id-9" class="oj-button-button oj-component-initnode">
+                        <div class="oj-button-label"><span data-bind="text: viewCartLable" class="oj-button-text" id="ui-id-9">Delete Datasets (0)</span></div></button>
+                </oj-button>
+                <oj-button id="savepref_but" class="oj-button-sl oj-button oj-component oj-enabled oj-button-full-chrome oj-button-text-only oj-complete oj-default" chroming="full" on-click="{{uploadDataset}}" style="padding-right: 1em; float: right;"><button data-oj-internal="" aria-labelledby="ui-id-10" class="oj-button-button oj-component-initnode">
+                        <div class="oj-button-label"><span data-bind="text: uploadDatasetLable" class="oj-button-text" id="ui-id-10">Upload Dataset</span></div></button>
+                </oj-button>
+            </div>
+        </div>
+        <oj-table id="dataset_table" aria-label="Dataset Table"
+                  data='[[datasource]]' 
+                  on-oj-sort="[[tableSorted]]"
+                  display='grid'
+                  selection-mode='{"row": "multiple", "column": "multiple"}' 
+                  columns='{{columnArray}}'
+                  style=''
+                  class="DatasetTable"
+                  columns.resizable='enabled'
+                  columns.width='20px'
+                  >
+        </oj-table>
+        <div id="ResultsExceeededDiv" class="ResultsExceeededDiv">Results Exceeded</div>
+        <script type="text/html" id="checkbox_tmpl">
+            <td style="background: blue;">
+            <oj-checkboxset aria-hidden='true'
+                            value='{{$context.row.Selected}}'
+                            class='oj-checkboxset-no-chrome'
+                            data-bind="attr:{
+                                id: 'table_checkboxset' + $context.cellContext.status.rowIndex}">
+                <oj-option data-bind="attr:{
+                                id: 'table_checkbox' + $context.cellContext.status.rowIndex}" value="checked"></oj-option>
+            </oj-checkboxset>
+            </td>
+            </script>
+            <script type="text/html" id="checkbox_hdr_tmpl">
+                <th style="width: 4em;max-width: 8em; background-color: red;">
+                <oj-checkboxset value='[false]'
+                                on-value-changed='[[$parent.selectAllListener]]'
+                                id="table_checkboxset_hdr"
+                                class='oj-checkboxset-no-chrome'>
+                    <oj-option id="table_checkbox_hdr" value="checked"></oj-option>
+                </oj-checkboxset>
+                </th>
+                </script>
+                <script type="text/html" id="ds_comments">
+                        <td data-bind="text: $context.row.SupportNotes, attr:{title:$context.row.SupportNotes}"></td>
+                        </script>
+                    
+                <script type="text/html" id="dataset_details">
+                    <td data-bind="attr:{title:$context.row.DatasetDetails}"><a onclick="showDatasetDetails(this)" data-DatasetId="" data-bind="text: $context.row.DatasetDetails, attr:{'data-DatasetId':$context.row.DatasetId, 'data-DatasetName':$context.row.FileName, 'data-DatasetStatus':$context.row.Status}" href="#">Appr Deta</a></td>
+                </script>
+                <!--</div>-->
+            </div>
+            <div id="DS_ErrorMessage" style="width: 100%; text-align: center; display: none; margin-top: 5%;"></div>
+            <oj-dialog class="delete_ds" id="deleteDatasetCart" title="Delete Datasets" on-oj-open='[[onCartOpen]]'>
+                <div slot="body">
+                    <div id="deleteDatasetCartBody"></div>
+                </div>
+                <div slot="footer" style="max-height: 2em;">
+                    <oj-button id="savepref_but" class='oj-button-sl' chroming='full' on-click="{{deleteDatasetInDB}}">
+                        Submit
+                    </oj-button>
+                    <oj-button id="canpref_but" class='oj-button-sl' chroming='full' data-bind="click: function() {document.querySelector('#deleteDatasetCart').close();}" >
+                        Close
+                    </oj-button>
+                </div>
+            </oj-dialog>
+
+            <oj-dialog class="upload_ds" id="UploadDataset" title="Upload New Dataset">
+                <div slot="body">
+                    <div id="UploadDatasetBody" style="margin-right: 5%;"></div>
+                </div>
+                <div slot="footer" style="max-height: 2em;">
+                    <oj-button id="uploadds_but" class='oj-button-sl' chroming='full' on-click="{{uploadFiles}}">
+                        Upload
+                    </oj-button>
+                    <oj-button id="cancelds_but" class='oj-button-sl' chroming='full' on-click="{{clearDs}}" title="Clears dataset/control file selection.">
+                        Clear
+                    </oj-button>
+                    <oj-button id="closeds_but" class='oj-button-sl' chroming='full' data-bind="click: function() {document.querySelector('#UploadDataset').close();}" >
+                        Close
+                    </oj-button>
+                </div>
+            </oj-dialog>
+
+            <oj-dialog class="view_ds" id="DSDetailsPopup" title="Dataset Details" on-oj-open='[[onDSDetailsPopupOpen]]'>
+                <div slot="body">
+                    <div id="DSDetailsBody" class="viewApprDetailsBody"></div>
+                </div>
+                <div slot="footer" style="max-height: 2em;">
+                    <oj-button id="canpref_but" class='oj-button-sl' chroming='full' data-bind="click: function() {document.querySelector('#DSDetailsPopup').close();}" >
+                        Close
+                    </oj-button>
+                </div>
+            </oj-dialog>
+        </div>

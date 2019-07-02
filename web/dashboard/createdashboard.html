@@ -1,0 +1,190 @@
+<div>
+    <div style="font-weight: 500; width: 100%;">
+        <a href="#" style="float: right; margin-right: 1%;" data-bind="click: function(){document.querySelector('#avblViz').open();}">Visualizations</a>
+        <a href="#" style="float: right; margin-right: 1%;" data-bind="visible: isSaveVisible, click: function(){document.querySelector('#saveDash').open();}"  >Save</a>
+    </div>
+    <!--<div><a href="#" data-bind="click: showVizPopup();">Pallete</a></div>-->
+    <div>
+        <div id="q_errorMessageDiv" style=" height: 3em;    text-align: center; display: none;">
+            <h3 data-bind="text: genericStatusMessage" class="mainpageErrorMessage" style="color: green; font-weight: 500; "></h3>
+        </div>
+        <div id="q_successMessageDiv" style=" height: 3em;    text-align: center; display: none;">
+            <h3 data-bind="text: genericStatusMessage" class="mainpageErrorMessage" style="color: green; font-weight: 500; "></h3>
+        </div>
+
+        <div data-bind="foreach: c_selVisualizations">
+            <div class="pchart" data-bind="if: type == 'barchart'">
+                <div class="rechart" data-bind="attr:{id:chartid}">
+                    <p class="chartTitle" style=""><span data-bind="text: name"></span></p> 
+                    <oj-chart id="barChart"
+                              type="bar" 
+                              stack="on"
+                              series="[[barSeriesValue]]"
+                              groups="[[barGroupsValue]]" 
+                              animation-on-display="auto"
+                              animation-on-data-change="auto"
+                              hover-behavior="dim"
+                              data-bind="attr:{'series': vSeries, id:id, 'groups': vGroups}" 
+                              style="width: 400px; height: 350px;  ">
+                    </oj-chart>
+                </div>
+            </div>
+            <div class="pchart" data-bind="if: type == 'linechart'">
+                <div  class="rechart" data-bind="attr:{id:chartid}">
+                    <p class="chartTitle" style=""><span data-bind="text: name"></span></p> 
+                    <oj-chart id="barChart"
+                              type="line" 
+                              stack="on"
+                              series="[[barSeriesValue]]"
+                              groups="[[barGroupsValue]]" 
+                              animation-on-display="auto"
+                              animation-on-data-change="auto"
+                              hover-behavior="dim"
+                              data-bind="attr:{'series': vSeries, id:id, 'groups': vGroups}" 
+                              style="width: 400px; height: 350px;  ">
+                    </oj-chart>
+                </div>
+            </div>
+            <div class="pchart" data-bind="if: type == 'piechart'">
+                <div class="rechart" data-bind="attr:{id:chartid}">
+                    <p class="chartTitle" style=""><span data-bind="text: name"></span></p> 
+                    <oj-chart id="barChart"
+                              type="pie" 
+                              stack="on"
+                              series="[[pieSeriesValue]]"
+                              animation-on-display="auto"
+                              animation-on-data-change="auto"
+                              hover-behavior="dim"
+                              data-bind="attr:{'series': vSeries, id:id}" 
+                              style="width: 400px; height: 350px;  ">
+                    </oj-chart>
+                </div>
+            </div>
+
+            <div class="pchart" data-bind="if: type == 'donutchart'">
+                <div class="rechart" data-bind="attr:{id:chartid}">
+                    <p class="chartTitle" style=""><span data-bind="text: name"></span></p> 
+                    <oj-chart id="barChart"
+                              type="pie" 
+                              stack="on"
+                              series="[[pieSeriesValue]]"
+                              animation-on-display="auto"
+                              animation-on-data-change="auto"
+                              hover-behavior="dim"
+                              style-defaults.pie-inner-radius="0.5"                
+                              data-bind="attr:{'series': vSeries, id:id}" 
+                              style="width: 400px; height: 350px;  ">
+                    </oj-chart>
+                </div>
+            </div>
+
+<!--            <div class="pchart" data-bind="if: type == 'donutchart'">
+                <div class="rechart" data-bind="attr:{id:chartid}">
+                    <p class="chartTitle" style=""><span data-bind="text: name"></span></p> 
+                    <oj-chart id="barChart"
+                              type="pie" 
+                              stack="on"
+                              series="[[pieSeriesValue]]"
+                              animation-on-display="auto"
+                              animation-on-data-change="auto"
+                              hover-behavior="dim"
+                              style-defaults.pie-inner-radius="0.5"                
+                              data-bind="attr:{'series': vSeries, id:id}" 
+                              style="width: 400px; height: 350px;  ">
+                    </oj-chart>
+                </div>
+            </div>-->
+
+            <div class="pchart" data-bind="if: type == 'guagechart'">
+                <div class="rechart" data-bind="attr:{id:chartid}">
+                    <p class="chartTitle" style=""><span data-bind="text: name"></span></p> 
+                    <oj-status-meter-gauge 
+                        id="gauge"
+                        min="0" 
+                        max="{{guagemaxvalue}}" 
+                        value="{{guagevalue}}"
+                        inner-radius=".85"
+                        step="1" 
+                        orientation="circular"
+                        thresholds="[[thresholdValues]]"
+                        metric-label.rendered="on"
+                        data-bind="attr:{'max': gmax, 'value': gvalue, 'thresholds': gthreshold, id:id}" 
+                        style= "width:200px; height:200px; margin: 0 auto; margin-top: calc(100% / 6);">
+                    </oj-status-meter-gauge>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+    <oj-dialog style="width:30em;" id="saveDash" title="Save Dashboard">
+        <div slot="body">
+            <div id="saveDashBody">
+                <div class="oj-form oj-form oj-sm-odd-cols-10 oj-md-odd-cols-5 oj-md-labels-inline oj-sm-labels-inline" id="oci-group-form">
+                    <div id="errorMessageDiv" style=" height: 3em;    text-align: center; display: none;">
+                        <h3 data-bind="text: genericStatusMessage" class="mainpageErrorMessage" style="color: red;"></h3>
+                    </div>
+
+                    <div class="oj-flex"> 
+                        <div class="oj-flex-item">
+                            <oj-label  for="name" show-required>Dashboard Name</oj-label>
+                        </div>
+                        <div class="oj-flex-item">
+                            <oj-input-text value="{{c_dashboardName}}"></oj-input-text>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div slot="footer" style="max-height: 2em;">
+            <oj-button class='oj-button-sl' chroming='full' on-click="{{saveDashboard}}">
+                Save
+            </oj-button>
+            <oj-button id="canpref_but" class='oj-button-sl' chroming='full' data-bind="click: function() {document.querySelector('#saveDash').close();}" >
+                Cancel
+            </oj-button>
+        </div>
+    </oj-dialog>
+
+    <oj-dialog style="width:30em;" id="avblViz" title="Available Visualizations">
+        <div slot="body">
+            <div id="avlvizBody">
+                <oj-list-view id="listview" aria-label="list using observable array" 
+                              data="[[visualizationsDP]]" selection-mode="multiple" selection="{{c_selectedVizs}}">
+                    <template slot="itemTemplate">
+                        <!--<span>                             <oj-bind-text value='[[$current.data.visualization_name]]'></oj-bind-text>                        </span>-->
+                        <div class="oj-flex">
+                            <div class="oj-flex-item" style="max-width:80px;margin:auto;">
+                                <img style="width: 70px;" data-bind="attr: {src: 'css/images/'+ $current.data.visualization_type +'.png', alt: $current.data.visualization_name}"/>
+                            </div>
+                            <div class="oj-flex-item" style="width:75%">
+                                <div class="oj-flex">
+                                    <div class="oj-flex-item">
+                                        <span class="data"><b>Dataset Name:</b> <oj-bind-text value="[[$current.data.dataset_title]]"></oj-bind-text></span>
+                                    </div>
+                                    <!--                                        <div class="oj-lg-4 oj-md-4 oj-sm-12">                                            
+                                                                            </div>-->
+                                    <div class="oj-flex-item">
+                                        <span class="data"><b>Visualization Name: </b><span><oj-bind-text value="[[$current.data.visualization_name]]"></oj-bind-text></span></span>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </template>
+                </oj-list-view>
+
+            </div>
+        </div>
+        <div slot="footer" style="max-height: 2em;">
+            <oj-button class='oj-button-sl' chroming='full' on-click="{{c_selectVisualizations}}">
+                Select
+            </oj-button>
+            <oj-button id="canpref_but" class='oj-button-sl' chroming='full' data-bind="click: function() {document.querySelector('#avblViz').close();}" >
+                Cancel
+            </oj-button>
+        </div>
+    </oj-dialog>
+
+</div>

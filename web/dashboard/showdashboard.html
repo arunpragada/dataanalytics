@@ -1,0 +1,157 @@
+<div style="text-align: center; font-weight: 700; padding-bottom: 5px; font-size: 18px;background-color: #dcebec;    height: 30px;">
+    <div style="padding-top: 3px;">Dashboard - <span data-bind="text: dashboardName"></span>
+        <a id="deleteLink" href="#" data-bind="visible: true, click: function(){document.querySelector('#deleteDash').open();}" >
+            <img src="css/images/cancel-48.png" title="Delete Dashboard" style="margin-right: 1%; float: right; height: 35px"/>
+        </a>
+        <a id="updateLink" href="#" data-bind="visible: true, click: launchEdit" >
+            <img src="css/images/editIcon_2.png" title="Update Dashboard" style="margin-right: 1%; float: right; "/>
+        </a>
+    </div>
+</div>
+<oj-dialog style="width:30em;" id="deleteDash" title="Delete Dashboard">
+    <div slot="body">
+        <div id="delDashBody">
+            <div class="oj-form oj-form oj-sm-odd-cols-10 oj-md-odd-cols-5 oj-md-labels-inline oj-sm-labels-inline" id="oci-group-form">
+                <div id="errorMessageDiv" style=" height: 3em;    text-align: center; display: none;">
+                    <h3 data-bind="text: genericStatusMessage" class="mainpageErrorMessage" style="color: red;"></h3>
+                </div>
+
+                <div class="oj-flex"> 
+                    <div class="oj-flex-item">
+                        <oj-label  for="name" show-required>Justification</oj-label>
+                    </div>
+                    <div class="oj-flex-item">
+                        <oj-input-text value="{{d_dashboardJus}}"></oj-input-text>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div slot="footer" style="max-height: 2em;">
+        <oj-button class='oj-button-sl' chroming='full' on-click="{{deleteDashboard}}">
+            Delete
+        </oj-button>
+        <oj-button id="canpref_but" class='oj-button-sl' chroming='full' data-bind="click: function() {document.querySelector('#deleteDash').close();}" >
+            Cancel
+        </oj-button>
+    </div>
+</oj-dialog>
+<oj-dialog style="width:30em;" id="editDash" title="Update Dashboard">
+    <div slot="body">
+        <div id="updateDashBody">
+            <div class="oj-form oj-form oj-sm-odd-cols-10 oj-md-odd-cols-5 oj-md-labels-inline oj-sm-labels-inline" id="oci-group-form">
+                <div id="errorMessageDiv" style=" height: 3em;    text-align: center; display: none;">
+                    <h3 data-bind="text: genericStatusMessage" class="mainpageErrorMessage" style="color: red;"></h3>
+                </div>
+
+                <div class="oj-flex"> 
+                    <div class="oj-flex-item">
+                        <oj-label  for="name" show-required>Justification</oj-label>
+                    </div>
+                    <div class="oj-flex-item">
+                        <oj-input-text value="{{u_dashboardJus}}"></oj-input-text>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div slot="footer" style="max-height: 2em;">
+        <oj-button class='oj-button-sl' chroming='full' on-click="{{updateDashboard}}">
+            Update
+        </oj-button>
+        <oj-button id="canpref_but" class='oj-button-sl' chroming='full' data-bind="click: function() {document.querySelector('#editDash').close();}" >
+            Cancel
+        </oj-button>
+    </div>
+</oj-dialog>
+<div data-bind="foreach: visualizations">
+    <div style="display:inline-block;" data-bind="if: type == 'barchart'">
+        <p class="chartTitle" style=""><span data-bind="text: name"></span></p> 
+        <oj-chart id="barChart"
+                  type="bar" 
+                  stack="on"
+                  series="[[barSeriesValue]]"
+                  groups="[[barGroupsValue]]" 
+                  animation-on-display="auto"
+                  animation-on-data-change="auto"
+                  hover-behavior="dim"
+                  data-bind="attr:{'series': vSeries, id:id, 'groups': vGroups}, style: {width: v_width, height: v_height}" 
+                  style="">
+        </oj-chart>
+    </div>
+    <div style="display:inline-block;" data-bind="if: type == 'barline'">
+        <p class="chartTitle" style=""><span data-bind="text: name"></span></p> 
+        <oj-chart id="barChart"
+                  type="combo" 
+                  stack="on"
+                  series="[[barSeriesValue]]"
+                  groups="[[barGroupsValue]]" 
+                  animation-on-display="auto"
+                  animation-on-data-change="auto"
+                  hover-behavior="dim"
+                  data-bind="attr:{'series': vSeries, id:id, 'groups': vGroups}, style: {width: v_width, height: v_height}" 
+                  style="">
+        </oj-chart>
+    </div>
+
+    <div style="display:inline-block;" data-bind="if: type == 'linechart'">
+        <p class="chartTitle" style=""><span data-bind="text: name"></span></p> 
+        <oj-chart id="barChart"
+                  type="line" 
+                  stack="on"
+                  series="[[barSeriesValue]]"
+                  groups="[[barGroupsValue]]" 
+                  animation-on-display="auto"
+                  animation-on-data-change="auto"
+                  hover-behavior="dim"
+                  data-bind="attr:{'series': vSeries, id:id, 'groups': vGroups}, style: {width: v_width, height: v_height}" 
+                  style="">
+        </oj-chart>
+    </div>
+    <div style="display:inline-block;" data-bind="if: type == 'piechart'">
+        <p class="chartTitle" style=""><span data-bind="text: name"></span></p> 
+        <oj-chart id="barChart"
+                  type="pie" 
+                  stack="on"
+                  series="[[pieSeriesValue]]"
+                  animation-on-display="auto"
+                  animation-on-data-change="auto"
+                  hover-behavior="dim"
+                  data-bind="attr:{'series': vSeries, id:id}, style: {width: v_width, height: v_height}" 
+                  style="">
+        </oj-chart>
+    </div>
+
+    <div style="display:inline-block;" data-bind="if: type == 'donutchart'">
+        <p class="chartTitle" style=""><span data-bind="text: name"></span></p> 
+        <oj-chart id="dnutChart"
+                  type="pie" 
+                  stack="on"
+                  animation-on-display="auto"
+                  animation-on-data-change="auto"
+                  hover-behavior="dim"
+                  style-defaults.pie-inner-radius="0.5"
+                  data-bind="attr:{'series': vSeries, id:id}, style: {width: v_width, height: v_height}" 
+                  style="">
+        </oj-chart>
+    </div>
+
+    <div style="display:inline-block;" data-bind="if: type == 'guagechart'">
+        <p class="chartTitle" style=""><span data-bind="text: name"></span></p> 
+        <oj-status-meter-gauge 
+            id="gauge"
+            min="0" 
+            max="{{guagemaxvalue}}" 
+            value="{{guagevalue}}"
+            inner-radius=".85"
+            step="1" 
+            orientation="circular"
+            thresholds="[[thresholdValues]]"
+            metric-label.rendered="on"
+            data-bind="attr:{'max': gmax, 'value': gvalue, 'thresholds': gthreshold, id:id}, style: {width: v_width, height: v_height}" 
+            style= "width:200px; height:200px; margin: 0 auto; margin-top: calc(100% / 6);">
+        </oj-status-meter-gauge>
+    </div>
+
+
+</div>

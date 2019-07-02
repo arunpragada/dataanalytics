@@ -1,0 +1,22 @@
+<div id="overlay">
+    <img id="OverlayImg" src='css/images/pleasewait.gif' width="128" height="128" style="vertical-align:middle; "/>
+</div>
+<div id="mainContent">
+    <h3 data-bind="text: DatasetName"></h3>
+    <h3 data-bind="text: DatasetStatus"></h3>
+    
+    <h3 style="font-weight: 500;">Sample Data:</h3>
+    <oj-table id="addappr-cart-appr-table" data="[[ds_datasource]]" display='grid'
+              columns='{{ds_columns}}'
+              style='min-width: 50em;max-width: 52em; width: 100%; height:100%; overflow: auto;'
+              selectionMode='{"row": "none", "column": "none"}'>
+    </oj-table>
+    
+    <h3 style="font-weight: 500;">Dataset Schema:</h3>
+    <oj-table id="addappr-cart-appr-table" data="[[datasource]]" display='grid'
+              columns='{{columns}}'
+              style='min-width: 50em;max-width: 52em; width: 100%; height:100%; overflow: auto;'
+              selectionMode='{"row": "none", "column": "none"}'>
+    </oj-table>
+    <div style="width: 100%; text-align: center; display: none" id="ExistingApprs_ErrorMsg"></div>
+</div>

@@ -1,0 +1,27 @@
+<div id="cal_main" style="margin: auto;animation: fadeEffect 0.5s; height: 100%;">
+
+    <div id="navlistcontainer" style="" class="mainpage_NavContainer">
+        <oj-navigation-list id="d_navList" aria-label="Choose a navigation item" 
+                            drill-mode="collapsible"
+                            expanded="[[expanded]]"
+                            selection="{{selectedMenuItem}}"
+                            item.selectable="[[itemOnly]]"
+                            >
+            <ul>
+                <li id="avldb">
+                    <a href="#" >
+                        <span class="demo-icon-font-24 demo-list-icon-16" style="margin-right: 4px;"></span> <span style="font-weight: 700;">Available Dashboards </span></a>
+                    <ul data-bind="foreach: allDashboards">
+                        <li id="" data-view="dashboard/showdashboard.html" data-bind="attr:{id:id}">
+                            <a href="#"><span class="demo-icon-font-24 demo-chart-icon-24" style="margin-right: 4px; "></span><span data-bind="text: Title" style="font-weight: 500;"></span></a>
+                        </li>
+                    </ul>
+                </li>
+                <li id="createdb" data-view="dashboard/createdashboard.html" data-style="">
+                    <a href="#" ><span class="demo-icon-font-24 demo-gear-icon-16" style="margin-right: 4px; "></span><span style="font-weight: 700;">Create Dashboard</span></a>
+                </li>
+            </ul>
+        </oj-navigation-list>
+    </div>
+    <div id="menubody" style="display: inline-block; width: 84%; max-width: 84%;min-width: 82%; vertical-align: top; padding-left: 0.5%;height: 99%;max-height: 99%;"></div>
+</div>

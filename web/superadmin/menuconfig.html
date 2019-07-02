@@ -1,0 +1,34 @@
+<div id="datagrid-wrapper" class="oj-flex gridWrapperContainer">  
+    <!--<div class="oj-sm-12 oj-lg-6 oj-flex-item" style="width:  100%; max-width: 100%; flex: 0 2 100%;margin:  0em 2em 2em 2em;">-->
+    <div class="mainpageActionBtnsContainer">
+        <div id="statusMessageDiv" class="mainpageMessageDiv">
+            <h3 data-bind="text: genericStatusMessage" class="mainpageStatusMessage"></h3>
+        </div>
+        <div id="errorMessageDiv" class="mainpageMessageDiv">
+            <h3 data-bind="text: genericStatusMessage" class="mainpageErrorMessage"></h3>
+        </div>
+        <div class="mainpageActionBtnsDiv">
+            <oj-button id="canpref_but" class="oj-button-sl oj-button oj-component oj-enabled oj-default oj-button-full-chrome oj-button-text-only oj-complete" chroming="full" on-click="{{clearApprovalChanges}}" style="padding-right: 1em; float: right;" title="Clears cart items and current selection as well."><button data-oj-internal="" aria-labelledby="ui-id-8" class="oj-button-button oj-component-initnode">
+                    <div class="oj-button-label"><span class="oj-button-text" id="ui-id-8">Clear</span></div></button>
+            </oj-button>
+            <oj-button id="savepref_but" class="oj-button-sl oj-button oj-component oj-enabled oj-default oj-button-full-chrome oj-button-text-only oj-complete" chroming="full" on-click="{{showCart}}" style="padding-right: 1em; float: right;"><button data-oj-internal="" aria-labelledby="ui-id-9" class="oj-button-button oj-component-initnode">
+                    <div class="oj-button-label"><span data-bind="text: viewCartLable" class="oj-button-text" id="ui-id-9">View Cart (0)</span></div></button>
+            </oj-button>
+            <oj-button id="savepref_but" class="oj-button-sl oj-button oj-component oj-enabled oj-button-full-chrome oj-button-text-only oj-complete oj-default" chroming="full" on-click="{{addToCart}}" style="padding-right: 1em; float: right;"><button data-oj-internal="" aria-labelledby="ui-id-10" class="oj-button-button oj-component-initnode">
+                    <div class="oj-button-label"><span data-bind="text: addToCartLable" class="oj-button-text" id="ui-id-10">Add to Cart</span></div></button>
+            </oj-button>
+        </div>
+    </div>
+    <oj-table id="config_table" aria-label="Menus Table"
+              data='[[datasource]]' 
+              display='grid'
+              selection-mode='{"row": "single", "column": "multiple"}' 
+              columns='{{columnArray}}'
+              style=''
+              class="homepageTable"
+              columns.resizable='enabled'
+              columns.width='20px'
+              >
+    </oj-table>
+</div>
+<div id="AddApprovers_ErrorMessage" style="width: 100%; text-align: center; display: none; margin-top: 5%;"></div>

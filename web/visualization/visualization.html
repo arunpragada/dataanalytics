@@ -1,0 +1,335 @@
+<style type="text/css">
+
+    input, button{
+        padding: 4px; border-radius: 3px;
+    }
+    select{
+        border-radius: 3px;
+
+    }
+</style>
+<style>
+    .qbody{
+        display: inline-block;
+    }
+</style>
+<div style="height: 100%; width: 100%">
+    <div id="vizHome">
+        <div id="q_errorMessageDiv" style=" height: 3em;    text-align: center; display: none;">
+            <h3 data-bind="text: genericStatusMessage" class="mainpageErrorMessage" style="color: green; font-weight: 500; "></h3>
+        </div>
+        <div id="q_successMessageDiv" style=" height: 3em;    text-align: center; display: none;">
+            <h3 data-bind="text: genericStatusMessage" class="mainpageErrorMessage" style="color: green; font-weight: 500; "></h3>
+        </div>
+
+        <div style="display: inline-block; width: 100%;">
+            <h2 class="categorygrouplabel rootLayoutNav_banner">Available Visualizations
+                <a id="createLink" onclick="altDisplay('editCreateViz', 'vizHome');" href="#" style="float: right;  margin-right: 2%; font-weight: 500; font-size: 18px; color: white;">
+                    <span class="oj-navigationlist-item-icon demo-icon-font-24 demo-edit-icon-24" style="color: white;"></span>
+                    <span class="oj-navigationlist-item-label">Create</span>
+                </a>
+            </h2>
+        </div>
+        <oj-list-view id="listview" aria-label="list using array" 
+                      data="[[existingVisualizations]]" 
+                      selection-mode="single">
+            <template slot="itemTemplate">
+                <div class="oj-flex">
+                    <div class="oj-flex-item" style="max-width:80px;margin:auto;">
+                        <img style="width: 70px;" data-bind="attr: {src: 'css/images/'+ $current.data.visualization_type +'.png', alt: $current.data.visualization_name}"/>
+                    </div>
+                    <div class="oj-flex-item" style="width:75%">
+                        <div class="oj-lg-10 oj-md-10 oj-sm-12">
+                            <div class="oj-flex row">
+                                <div class="oj-lg-4 oj-md-4 oj-sm-12">
+                                    <span class="header"><b>Dataset Name:</b> <oj-bind-text value="[[$current.data.dataset_title]]"></oj-bind-text></span>
+                                </div>
+                                <div class="oj-lg-4 oj-md-4 oj-sm-12">
+                                    <span class="data" style="display: none;"><b><a style="font-size: 18px;" href="#" data-vizname="" data-vizid="" data-bind="attr:{'data-vizid':$current.data.visualization_id,'data-vizname':$current.data.visualization_name}" onclick="editVisualization(this);">Edit</a></b></span>
+                                </div>
+                                <div class="oj-lg-4 oj-md-4 oj-sm-12">
+                                    <span class="data"><b><a style="font-size: 18px; color: red;" href="#" data-vizname="" data-vizid="" data-bind="attr:{'data-vizid':$current.data.visualization_id,'data-vizname':$current.data.visualization_name}" onclick="deleteVisualization(this);">Delete</a></b></span>
+                                </div>
+
+                            </div>
+                            <div class="oj-flex row">
+                                <div class="oj-lg-4 oj-md-4 oj-sm-12">
+                                    <span class="data"><b>Visualization Status: </b><span><oj-bind-text value="[[$current.data.visualization_status]]"></oj-bind-text></span></span>
+                                </div>
+                                <div class="oj-lg-4 oj-md-4 oj-sm-12">
+                                    <span class="data"><b>Comments: </b><span><oj-bind-text value="[[$current.data.support_notes]]"></oj-bind-text></span></span>
+                                </div>
+                                <div class="oj-lg-4 oj-md-4 oj-sm-12">
+                                    <span class="data"><b>Name: </b><span><oj-bind-text value="[[$current.data.visualization_name]]"></oj-bind-text></span></span>
+                                </div>
+                            </div>
+                            <div class="oj-flex">
+                                <div class="oj-lg-4 oj-md-4 oj-sm-12">
+                                    <span class="data"><b>Dataset Status: </b><span><oj-bind-text value="[[$current.data.dataset_status]]"></oj-bind-text></span></span>
+                                </div>
+                                <div class="oj-lg-4 oj-md-4 oj-sm-12">
+                                    <span class="data"><b>Type: </b><span><oj-bind-text value="[[$current.data.visualization_type]]"></oj-bind-text></span></span>
+                                </div>
+                                <div class="oj-lg-4 oj-md-4 oj-sm-12">
+                                    <span class="data"><b>Other Details: </b><span>--</span></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </template>
+        </oj-list-view>
+    </div>
+    <div id="editCreateViz" style="display: none;">
+        <div id="p_errorMessageDiv" style=" height: 3em;    text-align: center; display: none;">
+            <h3 data-bind="text: genericStatusMessage" class="mainpageErrorMessage" style="color: red; font-weight: 500; "></h3>
+        </div>
+        <div id="p_successMessageDiv" style=" height: 3em;    text-align: center; display: none;">
+            <h3 data-bind="text: genericStatusMessage" class="mainpageErrorMessage" style="color: green; font-weight: 500; "></h3>
+        </div>
+
+        <div style="display: inline-block; width: 100%;">
+            <!--<h2 class="categorygrouplabel rootPatterns_banner">Create visualization-->
+            <h2 class="categorygrouplabel rootLayoutNav_banner">Create visualization
+                <a id="saveLink" href="#" onclick="saveVizLinkClicked();">
+                    <img src="css/images/save-48.png" title="Save Visualization" style="margin-right: 2%; float: right; height: 35px"/>
+                </a>
+                <a id="deleteLink" href="#" onclick="cancelVizLinkClicked();">
+                    <img src="css/images/cancel-48.png" title="Cancel Visualization" style="margin-right: 1%; float: right; height: 35px"/>
+                </a>
+            </h2>
+        </div>
+        <oj-dialog style="width:30em;" id="cancelViz" title="Save Visualization">
+            <div slot="body">
+                <div id="cancelVizBody">
+                    <div style="margin: 1%;">
+                        Current visualization is not saved. Please save it...
+                    </div>
+
+                    <div class="oj-form oj-form oj-sm-odd-cols-10 oj-md-odd-cols-5 oj-md-labels-inline oj-sm-labels-inline" id="oci-group-form">
+                        <div id="errorMessageDiv" style=" height: 3em;    text-align: center; display: none;">
+                            <h3 data-bind="text: genericStatusMessage" class="mainpageErrorMessage" style="color: red;"></h3>
+                        </div>
+
+                        <div class="oj-flex"> 
+                            <div class="oj-flex-item">
+                                <oj-label  for="name" show-required>Visualization Name</oj-label>
+                            </div>
+                            <div class="oj-flex-item">
+                                <oj-input-text value="{{visualizationName}}"></oj-input-text>
+                            </div>
+                        </div>
+
+                        <div class="oj-flex"> 
+                            <div class="oj-flex-item">
+                                <oj-label  for="name" show-required>Justification</oj-label>
+                            </div>
+                            <div class="oj-flex-item">
+                                <oj-text-area id="supportNotes" value="{{supportNotes}}" rows="2"></oj-text-area>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div slot="footer" style="max-height: 2em;">
+                <oj-button class='oj-button-sl' chroming='full' on-click="{{saveVisualization}}">
+                    Save
+                </oj-button>
+                <oj-button class='oj-button-sl' chroming='full' on-click="{{clearVisualization}}">
+                    Delete
+                </oj-button>
+                <oj-button id="canpref_but" class='oj-button-sl' chroming='full' data-bind="click: function() {document.querySelector('#cancelViz').close();}" >
+                    Cancel
+                </oj-button>
+            </div>
+        </oj-dialog>
+
+        <oj-dialog style="width:30em;" id="deleteViz" title="Delete Visualization">
+            <div slot="body">
+                <div id="deleteVizBody">
+                    <div class="oj-form oj-form oj-sm-odd-cols-10 oj-md-odd-cols-5 oj-md-labels-inline oj-sm-labels-inline" id="oci-group-form">
+                        <div id="errorMessageDiv" style=" height: 3em;    text-align: center; display: none;">
+                            <h3 data-bind="text: genericStatusMessage" class="mainpageErrorMessage" style="color: red;"></h3>
+                        </div>
+                        <div class="oj-flex"> 
+                            <div class="oj-flex-item">
+                                <oj-label  for="name" show-required>Justification</oj-label>
+                            </div>
+                            <div class="oj-flex-item">
+                                <oj-text-area id="supportNotes" value="{{supportNotes}}" rows="2"></oj-text-area>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div slot="footer" style="max-height: 2em;">
+                <oj-button class='oj-button-sl' chroming='full' on-click="{{deleteVisualization}}">
+                    Delete
+                </oj-button>
+                <oj-button id="canpref_but" class='oj-button-sl' chroming='full' data-bind="click: function() {document.querySelector('#deleteViz').close();}" >
+                    Cancel
+                </oj-button>
+            </div>
+        </oj-dialog>
+        <div style="margin-top: 0.6em; text-align: center;" id="visualization_part">
+            <div id="chart_area" style="width: 60%; display: inline-block;text-align: center; min-height: 400px;" class="oj-panel oj-panel-alt2">
+                <div id="barc" style="display: none; text-align: center;">
+                    <oj-chart id="barChart"
+                              type="bar" 
+                              orientation="[[orientationValue]]"
+                              stack="[[stackValue]]"
+                              series="[[barSeriesValue]]"
+                              groups="[[barGroupsValue]]" 
+                              animation-on-display="auto"
+                              animation-on-data-change="auto"
+                              hover-behavior="dim"
+                              style="max-width:500px;width:100%;height:350px;">
+                    </oj-chart>
+                </div>
+                <div id="linec" style="display: none; text-align: center;">
+                    <oj-chart id="lineChart"
+                              type="line" 
+                              orientation="[[orientationValue]]"
+                              stack="[[stackValue]]"
+                              series="[[lineSeriesValue]]"
+                              groups="[[lineGroupsValue]]" 
+                              animation-on-display="auto"
+                              animation-on-data-change="auto"
+                              hover-behavior="dim"
+                              style="max-width:500px;width:100%;height:350px;">
+                    </oj-chart>
+                </div>
+                <div id="barlinec" style="display: none; text-align: center;">
+                    <oj-chart id="comboChart"
+                              type="combo" 
+                              orientation="[[orientationValue]]"
+                              stack="[[stackValue]]"
+                              series="[[blSeriesValue]]"
+                              groups="[[blGroupsValue]]" 
+                              animation-on-display="auto"
+                              animation-on-data-change="auto"
+                              hover-behavior="dim"
+                              style="max-width:500px;width:100%;height:350px;">
+                    </oj-chart>
+                </div>
+                <div id="piec" style="display: none; text-align: center;" >
+                    <oj-chart id="pieChart"
+                              type="pie" 
+                              series="[[pieSeriesValue]]"
+                              animation-on-display="auto"
+                              animation-on-data-change="auto"
+                              style-defaults.three-d-effect="[[threeDValue]]"
+                              hover-behavior="dim"
+                              style="max-width:500px;width:100%;height:350px;">
+                    </oj-chart>
+                </div>
+                <div id="donutc" style="display: none; text-align: center;" >
+                    <oj-chart id="donutChart"
+                              type="pie" 
+                              series="[[pieSeriesValue]]"
+                              animation-on-display="auto"
+                              animation-on-data-change="auto"
+                              style-defaults.three-d-effect="[[threeDValue]]"
+                              style-defaults.pie-inner-radius="[[innerRadius]]"
+                              animation-on-data-change="auto"
+
+                              hover-behavior="dim"
+                              style="max-width:500px;width:100%;height:350px;">
+                    </oj-chart>
+                </div>
+
+                <div id="guagec" style="display: none; text-align: center;     margin-top: 6%;" >
+                    <oj-status-meter-gauge 
+                        id="gauge"
+                        min="0" 
+                        max="{{guagemaxvalue}}" 
+                        value="{{guagevalue}}"
+                        inner-radius=".85"
+                        step="1" 
+                        orientation="circular"
+                        thresholds="[[thresholdValues]]"
+                        metric-label.rendered="on"
+
+                        style= "margin-left:auto; margin-right:auto; width:200px; height:200px;">
+                    </oj-status-meter-gauge>
+                    <!--                    <script type="text/html" id="guagetemplate">
+                                            <div style='margin-top:60px; position:absolute; top:0px; bottom:0px; margin-left:35%;'>
+                                                <span style='font-size:16px; font-weight:900;' data-bind="text: ($parent.guagevalue())"/>
+                                                <span data-bind="text: guagevalue"></span>
+                                            </div>
+                                            </script>-->
+                </div>
+
+            </div>
+
+            <div id="pallet_area" style="height: 400px; width: 30%; display: inline-block; text-align: center; overflow: scroll;" class="oj-panel oj-panel-alt2">
+                <img src="css/images/barchart.png" onclick="openVisualizationDialog('barchart');" class="viz_img"/>
+                <img src="css/images/barline.png" onclick="openVisualizationDialog('barline');" class="viz_img"/>
+                <img src="css/images/linechart.png" onclick="openVisualizationDialog('linechart');" class="viz_img"/>
+                <img src="css/images/piechart.png" onclick="openVisualizationDialog('piechart');" class="viz_img"/>
+
+                <img src="css/images/donutchart.png" onclick="openVisualizationDialog('donutchart');" class="viz_img"/>
+                <img src="css/images/guagechart.png" onclick="openVisualizationDialog('guagechart');" class="viz_img"/>
+                <img src="css/images/bubblechart.png" onclick="openVisualizationDialog('bubblechart');" class="viz_img" style="display: none;"/>
+                <img src="css/images/pyramidchart.png" onclick="openVisualizationDialog('pyramidchart');" class="viz_img" style="display: none;"/>
+                <img src="css/images/funnelchart.png" onclick="openVisualizationDialog('funnelchart');" class="viz_img" style="display: none;"/>
+            </div>
+
+        </div>
+        <div id="query_building_part" style="height: 50%; padding-top: 1%;display: none;">
+            <div style="background: #e0e5ea">
+                <div style="display: inline-block;width: 50%;margin-top: 0.4%;">
+                    <label>Data Source</label>
+                    <oj-select-one id="select" options="[[availableDS]]" value="{{selectedDS}}" placeholder="Select Dataset" on-value-changed="[[datasetChanged]]"></oj-select-one>
+                </div>
+                <div style="display: none; float: right; margin-right: 2%; margin-top: 0.4%;">
+                    <oj-button id='addQuery' chroming='full' on-click="{{addQuery}}">Add Query</oj-button>
+                </div>
+                <div style="float: right; margin-right: 2%; margin-top: 0.4%;">
+                    <oj-button id='verifyQuery' chroming='full' on-click="{{verifyQuery}}">Verify Query</oj-button>
+                </div>
+            </div>
+            <div id="user_queries" style="padding-top: 0.3em;margin-bottom: 1%;">
+                <div id="qry_div_1" style="border: 1px solid; border-radius: 4px; min-height: 5em;width: 100%">
+                    <div style="margin: 10px; font-size: 1.3em;">
+                        <div id="filter_divs" style="padding: 2px;" class="">
+                            <div class="qbody" style="width: 7em;">
+                                <label>Filter : </label>
+                            </div>
+                            <div class="qbody">
+                                <select name="feature_q" id="feature_q" style="width:10em; "></select>
+                                &nbsp;<select name="op_q" id="op_q" style="width:5em; "></select>
+                                &nbsp;<input type="text" name="qry_1" id="qry_1" style="width:10em; height: 16px;"/>
+                            </div>
+                        </div>
+                        <div id="agg_divs" style="padding: 2px;" class="">
+                            <div class="qbody" style="width: 7em;"><label>Agg : </label></div><div class="qbody">&nbsp;<select name="agg_1" id="agg_1" onchange="aggValueChnged();" style="width:10em"></select></div>
+                            <div id="feature_div" style="display: none; margin-top: 4px;">
+                                <div class="qbody" style="width: 7em; "><label>Feature : </label></div><div class="qbody">&nbsp;<select name="feature_1" id="feature_1" style="width:10em; "></select></div>
+                            </div>
+                        </div>
+                        <div id="group_by_divs">
+                            <div style="padding: 2px;" class="" id="grpby_1_div">
+                                <div  class="qbody"  style="width: 7em;"><label>Group By : </label></div><div class="qbody">&nbsp;<select id="grp_col_type_1" onchange="groupByColChanged(this)" name="grp_col_type_1" style="width:10em"></select></div>
+                                <div class="qbody" id="grpby_1_time" style="display: none"><label>Time Interval : </label></div>
+                                <div class="qbody" style="display: none">&nbsp;
+                                    <input type="text" id="interval_1" name="interval_1" style="width:10em" />
+                                </div>
+                                <div class="qbody">&nbsp;<button id="addgrpbtn" onclick="addGroup()"  class="oj-button oj-complete" style="width: 5em;">&nbsp;&nbsp;Add</button></div>
+                            </div>
+                        </div>
+                        <div style="padding: 2px; float: right; display: none" class="qbody">
+                            <div class="qbody">&nbsp;<button id="remQry_1" onclick="removeQuery(1)" name="remQry_1" class="oj-button oj-complete">Remove</button></div>
+                        </div>
+                        <div id="guage_divs" style="padding: 2px;">
+                            <div class="qbody" style="width: 7em; "><label>Gauge Value : </label></div><div class="qbody">&nbsp;<input type="text" name="max_gauge" id="max_gauge" style="width:10em; height: 16px;"/></div>
+                            <div class="qbody" style="width: 7em;"><label>Min Threshold: </label></div><div class="qbody">&nbsp;<input type="text" name="min_threshold" id="min_threshold" style="width:10em; height: 16px;"/></div>
+                            <div class="qbody" style="width: 7em; "><label>Max Threshold : </label></div><div class="qbody">&nbsp;<input type="text" name="max_threshold" id="max_threshold" style="width:10em; height: 16px;"/></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,61 @@
+<div id="overlay" style="display: none;">
+    <img id="OverlayImg">
+    <div style="margin-top: 20%;">
+        <div id="overlaytext" style="text-align: center;  font-size: 17px; font-weight: 500; color: #3498db;"></div>
+        <div class="loading_wait"></div>
+    </div>         
+    <!--<img id="OverlayImg" src='css/images/pleasewait.gif' width="128" height="128" style="vertical-align:middle; "/>-->
+</div>
+<div id="mainContent" class="cartBodyDiv">
+    <div id="errorMessageDiv_CART" style="display: none;">
+        <h4 data-bind="text: validationFailedMessage" class="cartErrorMessage"></h4>
+    </div>
+    <div style="height: 41%; ">
+        <oj-table id="deleteds-cart-table" data="[[datasource]]" display='grid'
+                  columns='{{columnArray}}'
+                  style=''
+                  class="DeleteDSCartTable"
+                  selectionMode='{"row": "none", "column": "none"}'>
+        </oj-table>
+        <script type="text/html" id="checkbox_tmpl_cart">
+            <td style="background: blue;">
+            <oj-checkboxset aria-hidden='true'
+                            value='{{$context.row.Selected}}'
+                            class='oj-checkboxset-no-chrome'
+                            data-bind="attr:{
+                                id: 'table_checkboxset' + $context.cellContext.status.rowIndex}">
+                <oj-option data-bind="attr:{
+                                id: 'cart_table_checkbox' + $context.cellContext.status.rowIndex}" value="checked"></oj-option>
+            </oj-checkboxset>
+            </td>
+            </script>
+            <script type="text/html" id="cart_disp_name">
+                <td data-bind="html: '<p style=\'font-weight:500\'>'+$context.row.DisplayName+'</p>'+$context.row.EntityDescription, attr:{title:$context.row.DisplayName }"></td>
+                </script>
+                <script type="text/html" id="cart_ent_desc">
+                    <td data-bind="text: $context.row.EntityDescription, attr:{title:$context.row.EntityDescription}"></td>
+                    </script>
+
+                    <br/>
+                    <!--<button id="deleteDept_btn" data-bind="click: deleteDepartment" disabled="true">Remove Selected Entity(s) From Cart</button>-->
+                    <a id="deleteDSFromCart_btn" data-bind="click: deleteDSFromCart" style="display: none; ">Remove selected dataset(s) from cart</a>
+                    <label id="deleteDSFromCart_lab" style="color: #5a5d5d; font-style: italic; width: 12em;">Select dataset(s) to delete from cart</label>
+                </div>
+                <hr>
+
+                <div class="addApprCart_JustificationDiv">
+                    <oj-label style="display: inline-block; " show-required>Justification</oj-label>
+                    <oj-text-area id="justification" value="{{justification}}" style="display: inline-block; padding-left: 2%;" rows="2"></oj-text-area>
+                </div>
+            </div>
+            <script type="text/html" id="row_tmpl">    
+                <!--    <tr>
+                        <td>
+                    <oj-checkboxset aria-hidden='true' on-value-changed="[[$parent.enableDelete]]" class='oj-checkboxset-no-chrome'>
+                        <oj-option data-bind="attr:{id: DepartmentId}" value="[[DepartmentId]]"></oj-option>
+                    </oj-checkboxset>
+                </td>-->
+                <!--<td><div id='deptId' data-bind="text: DepartmentId, click: function(data, event){$root.showChangeNameDialog(DepartmentId,data,event)}"></div></td>-->
+                <!--<td><div id="deptName" data-bind="text: DepartmentName, click: function(data, event){$root.showChangeNameDialog(DepartmentId,data,event)}"></div></td>-->
+                <!--</tr>-->
+            </script>

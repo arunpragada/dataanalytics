@@ -1,0 +1,665 @@
+/*
+    Document   : override
+    Created on : Feb 27, 2019
+    Author     : Nageswararao Morla
+    Description:
+        This is where any of your application specific styles should be included
+*/
+.header_ul_right{
+    display: inline-block;
+    float: right;
+    padding: 0vh;
+}
+
+.header_ul_center{
+    padding: 0vh;
+}
+
+.demo-tile {
+    font-weight: bold;
+}
+.backside {
+    transform: rotateY(180deg);
+}
+.cardface {
+    backface-visibility: hidden;
+    width:100%;
+    height:100%;
+    position:absolute;
+    top:0px;
+    left:0px;
+    box-sizing: border-box;
+    padding: 36px;
+
+}
+
+.demo-tile:hover {
+    /*background: #e7e7e7 ; #607D7B #e7e7e7*/
+    box-shadow: inset -1px 1px 1px 0px #f9f9f9, 4px -2px 7px 3px rgba(0,0,0,0.19);
+
+    /*0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);*/
+
+    -webkit-transition: all 200ms ease-in;
+    -webkit-transform: scale(1);
+    -ms-transition: all 200ms ease-in;
+    -ms-transform: scale(1);   
+    -moz-transition: all 200ms ease-in;
+    -moz-transform: scale(1);
+    transition: all 200ms ease-in;
+    transform: scale(1);
+    transition-property: opacity, left, top, height;
+    /*cursor: pointer;*/
+}
+
+.demo-zoom-transition {
+    transition: opacity .5s, left .5s, top .5s, width .5s, height .5s;
+}
+
+.demo-zoom-transition1 {
+    transition: opacity .5s, left .5s, top .5s, width .5s, height .5s;
+}
+
+.demo-scroll-container {
+    overflow: hidden;
+    /*background-color: #f5f5f5;*/
+    float: auto;
+
+    width: 100%;
+}
+.container {
+    width: 280px;
+    height: 340px;
+    position: relative;
+}
+
+@media screen and (min-width: 1250px) and (max-width: 1800px){
+    #calendar {
+        width: 1200px;
+        margin: 0 auto;
+        height : 550px!important;
+    }
+}
+@media screen and (min-width: 900px) and (max-width: 1249px) {
+    #calendar {
+        width: 1000px;
+        margin: 0 auto;
+        height : 550px!important;
+    }
+}
+@media screen and (min-width: 750px) and (max-width: 899px) {
+    #calendar {
+        width: 700px;
+        margin: 0 auto;
+        height : 550px!important;
+    }
+}
+@media screen and (min-width: 600px) and (max-width: 749px) {
+    #calendar {
+        width: 580px;
+        margin: 0 auto;
+        height : 550px!important;
+    }
+}
+@media screen and (min-width: 480px) and (max-width: 599px) {
+    #calendar {
+        width: 450px;
+        margin: 0 auto;
+        height : 550px!important;
+    }
+}
+@media screen and (min-width: 200px) and (max-width: 479px) {
+    #calendar {
+        width: 190px;
+        margin: 0 auto;
+        height : 550px!important;
+    }
+}
+
+
+/***************************MOBILE*******************************************/
+@media all and (max-width: 500px) {
+    .logo {
+        width: 300px;position: relative;height: 41px;text-align: center;
+    }
+    .idcscustom-ul {
+        padding: 1px;
+    }
+}
+
+/***************************TABS*******************************************/
+@media all and (max-width: 770px) and (min-width: 500px) {
+    .logo {
+        width: 500px;position: relative;height: 41px;float:left;text-align: center;
+    }
+
+    .idcscustom-ul {
+        padding: 2px;
+    }
+}
+
+/***************************DESKTOPS , LAPTOPS*******************************************/
+@media all and (min-width: 770px) {
+    .logo {
+        width: 572px;position: relative;height: 41px;float:left;text-align: center;
+    }
+    .idcscustom-ul {
+        float: right; padding: 2px;
+    }
+}
+/*******************Refer for Oracle recommended layouts : https://www.oracle.com/webfolder/s/brand/interactive/layout/index.html************************************/
+
+.button:hover {
+    background-color: #4CAF50; /* Green */
+    color: white;
+}
+.btn {
+    border: none; /* Remove borders */
+    color: #607D8B; /* Add a text color */
+    padding: 1px 1px; /* Add some padding */
+    cursor: pointer; /* Add a pointer cursor on mouse-over */
+    width: 100%;
+    height: 160px;
+    font-size : 12px;
+    -webkit-transition-duration: 0.4s; /* Safari */
+    transition-duration: 0.4s;
+    border-radius: 4px;
+}
+.default {background-color: #e7e7e7;} /* Gray #607D8B*/
+.default:hover {background: #e7e7e7; /*#607D7B*/
+                box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+}
+
+.grid-container {
+    display: grid;
+    grid-template-columns: auto auto auto auto;
+    grid-gap: 10px;
+    /*background-color: #2196F3;*/
+    padding: 10px;
+
+}
+
+h1 {
+    font-size : 25px;
+    color: #456270;
+    font-weight: bold;
+}
+
+
+h2 {
+    font-size : 20px;
+    font-weight: 500;
+}
+
+h4 {
+    margin-bottom: 0;
+}
+
+
+
+blink {
+    animation:3s blinker linear infinite;
+    -webkit-animation:3s blinker linear infinite;
+    -moz-animation:3s blinker linear infinite;
+    color: red;
+}
+
+@-moz-keyframes blinker {  
+    0% { opacity: 1.0; }
+    50% { opacity: 0.0; }
+    100% { opacity: 1.0; }
+}
+
+@-webkit-keyframes blinker {  
+    0% { opacity: 1.0; }
+    50% { opacity: 0.0; }
+    100% { opacity: 1.0; }
+}
+
+@keyframes blinker {  
+    0% { opacity: 1.0; }
+    50% { opacity: 0.0; }
+    100% { opacity: 1.0; }
+}
+
+span.bold-red {
+    color: red;
+    font-weight: bold;
+}
+
+span.status-up {
+    color: green;	    
+    font-weight: bold;
+}
+span.status-down {
+    color: red;
+    font-weight: bold;
+}
+
+.cal-style{font-size : 12px;}
+
+#marker-tooltip {
+    display: none;
+    position:absolute;
+    width: 300px;
+    height: 200px;
+    background-color: #ccc;
+    margin: 15px;
+}
+
+.update_delete_style {
+    float: right;
+    /*font-family: Arial,Helvetica,sans-serif;*/
+    font-size: 1em;
+    background-color: inherit;
+    /* box-sizing: border-box; 
+    padding: 0 .6em;*/
+    white-space: nowrap;
+    cursor: pointer;
+    border-color: rgba(0,0,0,.1) rgba(0,0,0,.1) rgba(0,0,0,.25);
+    border-top-right-radius: 4px;
+    border-bottom-right-radius: 4px;
+    width: 60px;
+    height: 20px;
+    margin-top: 0.3em;
+    text-decoration-color: blue;
+}
+.signin_admin{
+    font-size: 13px;
+    /*font-family: arial,sans-serif;*/
+    white-space: nowrap;
+    text-align: left;
+    display: inline-block;
+    line-height: 28px;
+    padding: 0 12px;
+    border-radius: 2px;
+    background: #4285f4;
+    background: -webkit-linear-gradient(top,#4387fd,#4683ea);
+    border: 1px solid #4285f4;
+    font-weight: bold;
+    outline: none;
+    cursor: pointer;
+    text-decoration: none;
+    color: #fff;
+}
+
+label {
+    font-size:16px;
+
+}
+
+td > h1{
+    text-align: centre;
+    font-size:17px;
+    /*font-family: Tahoma;*/
+}
+
+th {
+    background: lightblue;
+    border-color: white;
+
+}
+table{
+    border-collapse: collapse;
+
+}
+
+
+@keyframes fadeEffect {
+    from {opacity: 0;}
+    to {opacity: 1;}
+}
+
+.componentUnderline {
+    margin: 0 auto;
+    width: 90%;   
+}
+
+.hr {
+    border: solid #d6dfe6;
+    border-width: 1px 0 0;
+    margin: 7px 0;
+}
+.chartTitle{
+    font-size: 1.0em;
+    margin-left: 20%;
+}
+.linksStyle {
+    font-size: 0.8em;
+    margin-left: 0.3em;
+    float: right;
+    padding-right: 1em;
+    padding-top: 5px;
+}
+.chartClass{
+    max-width:100%;
+    width:100%;
+    height:155px;/*317px;*/
+}
+.moreChartClass{
+    max-width:100%;
+    width:100%;
+    max-height:400px;
+}
+.demo-filmstrip-item {
+    box-sizing: border-box;
+    width: 150px;
+    height: 150px;
+    margin: 5px;
+    text-align: center;
+    font-weight: bold;
+    color: #333;
+}
+
+.demo-arrow-controls {
+    display: inline-block;
+    vertical-align: top;
+    margin-right: 20px;
+}
+
+
+.idcsStrip{
+    /*width: 35em;*/
+    /*width: 71em;*/
+    width: 94%;
+    height: 17em;
+    background: WHITE;
+}
+.chartLegendInfo{
+    display: none;
+}
+.panel_appOwners{
+    font-size:0.8em;
+    height: 100%;
+    width: 100%;
+}
+
+.main_app_my_grid{
+    font-size:0.8em;
+    justify-content: flex-start !important;
+}
+
+
+.oj-pagingcontrol-nav-input-section{
+    width:35% !important;
+}
+
+.oj-pagingcontrol-nav-label{
+    width:35% !important;
+}
+
+
+#overlay {
+    position: fixed;
+    display: none;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0,0,0,0.06);
+    z-index: 2;
+    cursor: pointer;
+}
+
+
+.oj-bold-button > button{
+    font-size:12px !important;
+    font-weight: 500 !important;
+}
+
+
+
+#paging > .oj-pagingcontrol-content > .oj-pagingcontrol-nav > .oj-pagingcontrol-nav-input-section{
+    width:45% !important;
+}
+#paging > .oj-pagingcontrol-content > .oj-pagingcontrol-nav > .oj-pagingcontrol-nav-input-section > .oj-pagingcontrol-nav-label{
+    width:30% !important;
+    font-size: 14px;
+}
+
+#paging > .oj-pagingcontrol-content > .oj-pagingcontrol-nav > .oj-pagingcontrol-nav-input-summary {
+    font-size: 14px;
+    display: inline-block !important;
+
+}
+#paging > .oj-pagingcontrol-content > .oj-pagingcontrol-nav > .oj-pagingcontrol-nav-arrow-section {
+    width:100%;
+    display:inherit !important;
+}
+
+#paging > .oj-pagingcontrol-content > .oj-pagingcontrol-nav > .oj-pagingcontrol-nav-arrow-section>.oj-pagingcontrol-nav-pages-section >.oj-pagingcontrol-nav-pages-links{
+    display:block !important;    
+}
+
+
+
+#paging_grp > .oj-pagingcontrol-content > .oj-pagingcontrol-nav > .oj-pagingcontrol-nav-input-section{
+    width:45% !important;
+}
+#paging_grp > .oj-pagingcontrol-content > .oj-pagingcontrol-nav > .oj-pagingcontrol-nav-input-section > .oj-pagingcontrol-nav-label{
+    width:30% !important;
+    font-size: 14px;
+}
+
+#paging_grp > .oj-pagingcontrol-content > .oj-pagingcontrol-nav > .oj-pagingcontrol-nav-input-summary {
+    font-size: 14px;
+    display: inline-block !important;
+
+}
+#paging_grp > .oj-pagingcontrol-content > .oj-pagingcontrol-nav > .oj-pagingcontrol-nav-arrow-section {
+    width:100%;
+    display:inherit !important;
+}
+
+#paging_grp > .oj-pagingcontrol-content > .oj-pagingcontrol-nav > .oj-pagingcontrol-nav-arrow-section>.oj-pagingcontrol-nav-pages-section >.oj-pagingcontrol-nav-pages-links{
+    display:block !important;    
+}
+
+.searchCriteriaDiv{
+    text-align: center; 
+    /*margin-left: 12%;*/
+    padding-top: 0.5%;
+}
+
+.searchCriteria{
+    max-width: 87em; 
+    height: 3em; 
+    text-align: center; 
+    margin-left: 2%;
+    /*margin: 0 auto;*/ /*position: absolute;*/ 
+    width: 100em; 
+    right: 0;left: 0; 
+    background: white;
+}
+.tableLevelSearchFilter{
+    max-width: 87em; 
+    height: 2.5em; 
+    text-align: center; 
+    /*margin: 0 auto;*/ 
+    margin-left: 2%;
+    /*display: none;*/
+    /*position: absolute;*/ 
+    right: 0;left: 0; 
+    background: white; 
+    width: 100em;
+}
+
+.searchCriteriaFilterInput{
+    width: 51em; display: inline-block;padding-right: 1em;max-width: 60em;
+}
+
+.searchCriteriaFilterLabel{
+    display: inline-block; padding-left: 1em; width: 5em;
+}
+.mainpageActionBtnsContainer{
+    float: right; width: 100%;margin:  0 auto;height: 3em;
+}
+.mainpageActionBtnsDiv{
+    display: inline-block; float: right;
+}
+.mainpageMessageDiv{
+    display: none; text-align: center;
+}
+.mainpageStatusMessage{
+    font-size:  16px;
+    text-align:  center;
+    color: #258639;
+    font-weight:  500;
+}
+.mainpageErrorMessage{
+    font-size:  16px; text-align:  center; color: #d9533e; font-weight:  500;
+}
+.cartErrorMessage{
+    font-size:  12px; text-align:  center; color: #d9533e; font-weight:  500;
+}
+
+.DSTable_Status_Data{
+    width:10%; 
+    max-width:10% !important;
+}
+.DSTable_Status_Header{
+    width:10%; 
+    max-width:10% !important; 
+    background-color: #5a5d5d; 
+    color: #F5F5F5; 
+    font-weight: 700;
+}
+
+.DSTable_Name_Data{
+    width:18%; 
+    max-width:18% !important;
+}
+.DSTable_Name_Header{
+    width:18%; 
+    max-width:18% !important; 
+    background-color: #5a5d5d; 
+    color: #F5F5F5; 
+    font-weight: 700;
+}
+
+.DSTable_CF_Name_Data{
+    width:18%; 
+    max-width:18% !important;
+}
+.DSTable_CF_Name_Header{
+    width:18%; 
+    max-width:18% !important; 
+    background-color: #5a5d5d; 
+    color: #F5F5F5; 
+    font-weight: 700;
+}
+.DSTable_HDFS_Data{
+    width:15%; 
+    max-width:15% !important;
+}
+.DSTable_HDFS_Header{
+    width:15%; 
+    max-width:15% !important; 
+    background-color: #5a5d5d; 
+    color: #F5F5F5; 
+    font-weight: 700;
+}
+.DSTable_EDGE_Data{
+    width:15%; 
+    max-width:15% !important;
+}
+.DSTable_EDGE_Header{
+    width:15%; 
+    max-width:15% !important; 
+    background-color: #5a5d5d; 
+    color: #F5F5F5; 
+    font-weight: 700;
+}
+.DSTable_Details_Data{
+    width:10%; 
+    max-width:10% !important;
+}
+.DSTable_Details_Header{
+    width:10%; 
+    max-width:10% !important; 
+    background-color: #5a5d5d; 
+    color: #F5F5F5; 
+    font-weight: 700;
+}
+.DSTable_Comments_Data{
+    width:22%; 
+    max-width:22% !important;
+}
+.DSTable_Comments_Header{
+    width:22%; 
+    max-width:22% !important; 
+    background-color: #5a5d5d; 
+    color: #F5F5F5; 
+    font-weight: 700;
+}
+
+.DS_Delete_Table_FN_Data{
+    width:35%; 
+    max-width:35% !important;
+}
+.DS_Delete_Table_FN_Header{
+    width:35%; 
+    max-width:35% !important; 
+    background-color: #5a5d5d; 
+    color: #F5F5F5; 
+    font-weight: 700;
+}
+.DS_Delete_Table_CN_Data{
+    width:35%; 
+    max-width:35% !important;
+}
+.DS_Delete_Table_CN_Header{
+    width:35%; 
+    max-width:35% !important; 
+    background-color: #5a5d5d; 
+    color: #F5F5F5; 
+    font-weight: 700;
+}
+.DS_Delete_Table_Status_Data{
+    width:20%; 
+    max-width:20% !important;
+}
+.DS_Delete_Table_Status_Header{
+    width:20%; 
+    max-width:20% !important; 
+    background-color: #5a5d5d; 
+    color: #F5F5F5; 
+    font-weight: 700;
+}
+
+.DatasetTable{
+    /*min-width: 60em;*/
+    /*max-width: 62em;*/ 
+    max-height: 90%; 
+    width: 100%; 
+    overflow: auto;
+}
+.ResultsExceeededDiv{
+    display: none;    
+    padding-top:  1%;
+    text-align:  center;
+    width:  100%;
+    color:  #d9533e;
+    font-weight:  500;
+
+}
+
+.upload_ds{
+    display:none; width: 30%;min-width: 30em; 
+}
+
+.delete_ds{
+    display:none; width: 40%;min-width:40em; 
+}
+
+.view_ds{
+    display:none; width: 50%;min-width:45em; 
+}
+
+.DeleteDSCartTable{
+    max-height: 93%; 
+    width: 100%; 
+    overflow: auto;
+    /*overflow: hidden;*/
+}
